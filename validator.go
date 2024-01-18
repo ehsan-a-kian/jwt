@@ -38,7 +38,7 @@ type Validator struct {
 	leeway time.Duration
 
 	// timeFunc is used to supply the current time that is needed for
-	// validation. If unspecified, this defaults to time.Now.
+	// validation. If unspecified, this defaults to time.Now
 	timeFunc func() time.Time
 
 	// requireExp specifies whether the exp claim is required
@@ -60,7 +60,7 @@ type Validator struct {
 	expectedIss string
 
 	// expectedSub contains the subject this token expects. Supplying an empty
-	// string will disable sub checking.
+	// string will disable sub-checking.
 	expectedSub string
 }
 
@@ -80,7 +80,7 @@ func NewValidator(opts ...ParserOption) *Validator {
 }
 
 // Validate validates the given claims. It will also perform any custom
-// validation if claims implements the [ClaimsValidator] interface.
+// validation if claims implement the [ClaimsValidator] interface.
 //
 // Note: It will NOT perform any *signature verification* on the token that
 // contains the claims and expects that the [Claim] was already successfully
@@ -236,7 +236,7 @@ func (v *Validator) verifyAudience(claims Claims, cmp string, required bool) err
 		return errorIfRequired(required, "aud")
 	}
 
-	// use a var here to keep constant time compare when looping over a number of claims
+	// use a var here to keep constant time compare when looping over several claims
 	result := false
 
 	var stringClaims string
@@ -275,7 +275,7 @@ func (v *Validator) verifyIssuer(claims Claims, cmp string, required bool) error
 	return errorIfFalse(iss == cmp, ErrTokenInvalidIssuer)
 }
 
-// verifySubject compares the sub claim against cmp.
+// verifySubject compares the sub-claim against cmp.
 //
 // If sub is not set, it will succeed if the claim is not required,
 // otherwise ErrTokenRequiredClaimMissing will be returned.
@@ -305,7 +305,7 @@ func errorIfFalse(value bool, err error) error {
 	}
 }
 
-// errorIfRequired returns an ErrTokenRequiredClaimMissing error if required is
+// errorIfRequired returns an ErrTokenRequiredClaimMissing error, if required, is
 // true. Otherwise, nil is returned.
 func errorIfRequired(required bool, claim string) error {
 	if required {
